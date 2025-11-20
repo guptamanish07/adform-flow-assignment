@@ -4,6 +4,7 @@ import { addCampaigns } from './store/reducers/campaignReducer';
 import store from './store/store';
 import { Provider, useDispatch } from 'react-redux';
 import CampaignManager from './components/CampaignManager';
+import { initialCampaigns } from './data/intialCampaigns';
 
 
 import './App.css';
@@ -19,6 +20,7 @@ function AppContent() {
 
   useEffect(() => {
     dispatch(fetchUsers());
+    dispatch(addCampaigns(initialCampaigns));
   }, [dispatch]);
 
   return (
