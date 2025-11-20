@@ -71,6 +71,7 @@ const Addbutton = styled.button`
   border: none;
   border-radius: 4px;
   font-size: 14px;
+  min-width: 134px;
   &:hover {
     background-color: #0056b3;
   }
