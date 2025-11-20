@@ -1,9 +1,13 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, shallowEqual , useDispatch} from 'react-redux';
 
 import SearchCampaign  from './SearchCampaign';
 import DateRangeFilter from './DateRangeFilter';
 import CampaignList from './CampaignList';
+import CampaignForm from './CampaignForm';
+
+import { addCampaigns } from '../store/reducers/campaignReducer';
+
 
 import styled from 'styled-components';
 
@@ -27,7 +31,7 @@ const Section = styled.div`
   margin-bottom: 20px;
 `;
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.h3`
   margin-top: 0;
   color: #333;
   border-bottom: 2px solid #007bff;
@@ -53,6 +57,30 @@ const FiltersSection = styled.div`
   }
 `;
 
+const SectionHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+`;
+
+
+const Addbutton = styled.button`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  &:hover {
+    background-color: #0056b3;
+  }
+
+  @media (max-width: 480px){
+    min-width: 120px;
+    font-size: 12px;
+  }
+`;
+
 function CampaignManager() {
 
   const { filteredCampaigns, users, usersLoading } = useSelector((state) => ({
@@ -60,6 +88,14 @@ function CampaignManager() {
     users: state.users.users,
     usersLoading: state.users.loading,
   }), shallowEqual);
+  const dispatch = useDispatch();
+
+  const [showForm, setShowForm] = useState(false);
+
+  const handleAddCampaign = (campaign) => {
+    dispatch(addCampaigns([campaign]));
+    setShowForm(false);
+  }
 
   if(usersLoading) {
       return <Container>Loading users...</Container>;
@@ -75,8 +111,22 @@ function CampaignManager() {
               </FiltersSection>
           </Section>
           <Section>
+            <SectionHeader>
               <SectionTitle>Campaigns</SectionTitle>
-              <CampaignList campaigns={filteredCampaigns} users={users} />
+              <Addbutton onClick = {() => setShowForm(!showForm)}> 
+                {showForm ? "Cancel"  : "Add Campaign"}
+              </Addbutton>
+            </SectionHeader>
+            {
+              showForm && (
+                <CampaignForm
+                  onSubmit={handleAddCampaign}
+                  onCancel={() => setShowForm(false)}
+                 />
+              )
+            }
+
+            <CampaignList campaigns={filteredCampaigns} users={users} />
           </Section>
       </Container>
   );
