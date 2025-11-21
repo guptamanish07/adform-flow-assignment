@@ -8,15 +8,33 @@ const TableContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  max-height: 500px;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 768px) {
     margin-top: 16px;
     border-radius: 6px;
+    max-height: 400px;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 350px;
   }
 `;
 
 const TableWrapper = styled.div`
-  overflow-x: auto;
+  overflow: auto;
+  flex: 1;
+  max-height: 450px;
+
+  @media (max-width: 768px) {
+    max-height: 350px;
+  }
+
+  @media (max-width: 480px) {
+    max-height: 280px;
+  }
 `;
 
 const Table = styled.table`
@@ -48,9 +66,12 @@ const TableHeader = styled.th`
   text-align: left;
   font-weight: 600;
   color: #333;
-  border-bottom: 2px solid #dee2e6;
   font-size: 14px;
   white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 2px solid #dee2e6;
 
   @media (max-width: 768px) {
     padding: 12px 10px;
@@ -107,7 +128,7 @@ const StatusBadge = styled.span`
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  
+ 
   @media (max-width: 480px) {
     padding: 3px 6px;
     font-size: 11px;
@@ -121,7 +142,7 @@ const StatusIcon = styled.span`
   height: 8px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.8);
-  
+ 
   @media (max-width: 480px) {
     width: 6px;
     height: 6px;
@@ -219,9 +240,9 @@ function CampaignList({ campaigns, users }) {
   return (
     <TableContainer>
       <TableWrapper>
-        <Table 
+        <Table
           ref={tableRef}
-          role="table" 
+          role="table"
           aria-label="Campaign management data table with keyboard navigation support"
           aria-rowcount={campaigns.length + 1}
           aria-describedby="table-summary table-instructions"
@@ -244,7 +265,7 @@ function CampaignList({ campaigns, users }) {
           </thead>
           <tbody>
             {campaigns?.map((campaign, index) => (
-              <TableRow 
+              <TableRow
                 key={campaign.id}
                 role="row"
                 tabIndex={index === 0 ? 0 : -1}
@@ -264,19 +285,19 @@ function CampaignList({ campaigns, users }) {
                   {formatDate(campaign.endDate)}
                 </TableData>
                 <TableData role="cell">
-                  <StatusBadge 
+                  <StatusBadge
                     $active={Boolean(campaign.isActive)}
                     role="status"
                     aria-label={`Campaign status: ${campaign.isActive ? 'Active' : 'Inactive'}`}
                   >
-                    <StatusIcon 
+                    <StatusIcon
                       aria-hidden="true"
                       title={campaign.isActive ? 'Active indicator' : 'Inactive indicator'}
                     />
                     {campaign.isActive ? 'Active' : 'Inactive'}
                   </StatusBadge>
                 </TableData>
-                <BudgetCell 
+                <BudgetCell
                   role="cell"
                   aria-label={`Budget: ${formatBudget(campaign.Budget)}`}
                 >
