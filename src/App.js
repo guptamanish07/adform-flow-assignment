@@ -18,9 +18,10 @@ window.AddCampaigns = (campaigns) => {
 function AppContent() {
   const dispatch = useDispatch();
 
+  // We could create a custom `useEffectOnce` hook to prevent running the effect twice,
+  // but keeping the standard `useEffect` behavior is important for React’s safety checks.
   useEffect(() => {
     dispatch(fetchUsers());
-    dispatch(addCampaigns(initialCampaigns));
   }, [dispatch]);
 
   return (

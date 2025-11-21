@@ -1,5 +1,7 @@
 import { isWithinInterval } from 'date-fns';
 
+import { initialCampaigns } from '../../data/intialCampaigns';
+
 export const ADD_CAMPAIGNS = 'campaigns/addCampaigns';
 export const SET_SEARCH_TERM = 'campaigns/setSearchTerm';
 export const SET_DATE_RANGE = 'campaigns/setDateRange';
@@ -85,8 +87,8 @@ const filterCampaigns = (campaigns, searchTerm, dateRange) => {
 };
 
 const initialState = {
-  campaigns: [],
-  filteredCampaigns: [],
+  campaigns: initialCampaigns,
+  filteredCampaigns: initialCampaigns,
   searchTerm: '',
   dateRange: {
     start: '',
