@@ -113,7 +113,7 @@ function CampaignManager() {
           </Section>
           <Section>
             <SectionHeader>
-              <SectionTitle>Campaigns</SectionTitle>
+              <SectionTitle>Campaigns ({filteredCampaigns?.length || 0})</SectionTitle>
               <Addbutton onClick = {() => setShowForm(!showForm)}> 
                 {showForm ? "Cancel"  : "Add Campaign"}
               </Addbutton>
