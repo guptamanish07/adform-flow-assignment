@@ -85,7 +85,7 @@ const ButtonContainer = styled.div`
 
 function SearchCampaign() {
   const dispatch = useDispatch();
-  const { searchTerm } = useSelector(state => state.campaigns);
+  const { searchTerm , dateRange } = useSelector(state => state.campaigns);
 
   const handleSearchChange = (e) => {
     dispatch(setSearchTerm(e.target.value));
@@ -94,6 +94,8 @@ function SearchCampaign() {
   const handleClear = () => {
     dispatch(clearFilters());
   };
+
+  const isClearEnabled = searchTerm || dateRange?.start || dateRange?.endDate;
 
   return (
     <SearchContainer>
@@ -108,7 +110,7 @@ function SearchCampaign() {
         />
         <ClearButton
           onClick={handleClear}
-          disabled={!searchTerm}
+          disabled={!isClearEnabled} 
           title="Clear all filters"
         >
           Clear
