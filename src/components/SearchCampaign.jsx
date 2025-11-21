@@ -45,7 +45,7 @@ const SearchInput = styled.input`
 
   @media (max-width: 480px) {
     width: 100%;
-    max-width: none;
+    min-width: 0;
     flex: 1;
   }
 `;

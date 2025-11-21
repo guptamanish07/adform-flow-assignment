@@ -40,12 +40,13 @@ const Label = styled.label`
   font-size: 14px;
 `;
 
-const Input = styled.input`
+const   Input = styled.input`
   padding: 10px 12px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -56,6 +57,11 @@ const Input = styled.input`
   &.error {
     border-color: #dc3545;
     box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    min-width: 0; 
   }
 
 `;
@@ -66,6 +72,7 @@ const Select = styled.select`
   border-radius: 4px;
   font-size: 14px;
   background: white;
+  box-sizing: border-box;
   transition: border-color 0.3s;
 
   &:focus {
@@ -77,6 +84,11 @@ const Select = styled.select`
   &.error {
     border-color: #dc3545;
     box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    min-width: 0;
   }
 
 `;
