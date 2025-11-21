@@ -10,12 +10,19 @@ const DateRangeContainer = styled.fieldset`
   border: none;
   padding: 0;
   margin: 0;
+  @media (max-width: 480px){
+    width:100%;
+  }
 `;
 
 const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  @media (max-width: 480px){
+    width:100%;
+  }
 `;
 
 const Label = styled.label`
@@ -44,6 +51,7 @@ const DateInput = styled.input`
   width: 140px;
   min-width: 120px;
   transition: border-color 0.3s;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -56,12 +64,8 @@ const DateInput = styled.input`
     box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
   }
 
-  @media (max-width: 768px) {
-    width: 120px;
-  }
-
   @media (max-width: 480px) {
-    width: 90%;
+    width: 100%;
     max-width: none;
   }
 `;

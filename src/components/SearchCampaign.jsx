@@ -7,6 +7,10 @@ const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+
+  @media (max-width: 480px) {
+    width: 100%;
+  }
 `;
 
 const Label = styled.label`
@@ -22,6 +26,7 @@ const SearchInput = styled.input`
   font-size: 14px;
   width: 250px;
   min-width: 200px;
+  box-sizing: border-box;
   transition: border-color 0.3s;
 
   &:focus {
@@ -39,7 +44,7 @@ const SearchInput = styled.input`
   }
 
   @media (max-width: 480px) {
-    width: 90%;
+    width: 100%;
     max-width: none;
     flex: 1;
   }
@@ -74,6 +79,7 @@ const ButtonContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+    width: 100%;
   }
 `;
 
@@ -100,7 +106,7 @@ function SearchCampaign() {
           value={searchTerm}
           onChange={handleSearchChange}
         />
-        <ClearButton 
+        <ClearButton
           onClick={handleClear}
           disabled={!searchTerm}
           title="Clear all filters"
