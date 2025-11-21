@@ -66,18 +66,6 @@ const DateInput = styled.input`
   }
 `;
 
-const DateSeparator = styled.span`
-  color: #666;
-  font-weight: 600;
-  margin-top: 24px;
-  align-self: center;
-
-  @media (max-width: 480px) {
-    margin-top: 0;
-    align-self: flex-start;
-  }
-`;
-
 const ErrorMessage = styled.div`
   color: #dc3545;
   font-size: 12px;
@@ -123,8 +111,6 @@ function DateRangeFilter() {
             aria-label="Start date for campaign filter"
           />
         </InputGroup>
-
-        <DateSeparator aria-hidden="true">to</DateSeparator>
 
         <InputGroup>
           <Label htmlFor="end-date">To Date</Label>
