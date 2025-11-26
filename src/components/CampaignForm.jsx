@@ -149,6 +149,8 @@ function CampaignForm({ onSubmit, onCancel }) {
     userId: ''
   });
 
+  console.log("formData", formData);
+
   const [errors, setErrors] = useState({});
 
   const validateField = (name, value) => {
@@ -212,6 +214,8 @@ function CampaignForm({ onSubmit, onCancel }) {
     return errors[fieldName] ? 'error' : '';
   };
 
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <FormContainer>
       <FormTitle>Add New Campaign</FormTitle>
@@ -227,6 +231,7 @@ function CampaignForm({ onSubmit, onCancel }) {
               onChange={handleInputChange}
               className={getInputClassName('name')}
               placeholder="Enter campaign name"
+              min={today}
             />
             {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
           </FormGroup>
@@ -240,6 +245,7 @@ function CampaignForm({ onSubmit, onCancel }) {
               value={formData.startDate}
               onChange={handleInputChange}
               className={getInputClassName('startDate')}
+              min={'2025-11-26'}
             />
             {errors.startDate && <ErrorMessage>{errors.startDate}</ErrorMessage>}
           </FormGroup>
