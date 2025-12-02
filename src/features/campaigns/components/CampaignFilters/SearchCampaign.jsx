@@ -1,7 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setSearchTerm, clearFilters } from '../../../../store/reducers/campaignReducer';
+import useCampaignFilters from '../../hooks/useCampaignFilters';
 
 const SearchContainer = styled.div`
   display: flex;
@@ -84,18 +83,16 @@ const ButtonContainer = styled.div`
 `;
 
 function SearchCampaign() {
-  const dispatch = useDispatch();
-  const { searchTerm , dateRange } = useSelector(state => state.campaigns);
+  const {
+    searchTerm,
+    hasActiveFilters,
+    handleSearchChange,
+    handleClearFilters
+  } = useCampaignFilters();
 
-  const handleSearchChange = (e) => {
-    dispatch(setSearchTerm(e.target.value));
+  const handleInputChange = (e) => {
+    handleSearchChange(e.target.value);
   };
-
-  const handleClear = () => {
-    dispatch(clearFilters());
-  };
-
-  const isClearEnabled = searchTerm || dateRange?.start || dateRange?.endDate;
 
   return (
     <SearchContainer>
@@ -106,11 +103,11 @@ function SearchCampaign() {
           type="text"
           placeholder="Enter campaign name..."
           value={searchTerm}
-          onChange={handleSearchChange}
+          onChange={handleInputChange}
         />
         <ClearButton
-          onClick={handleClear}
-          disabled={!isClearEnabled} 
+          onClick={handleClearFilters}
+          disabled={!hasActiveFilters}
           title="Clear all filters"
         >
           Clear

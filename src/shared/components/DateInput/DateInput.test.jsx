@@ -42,7 +42,7 @@ describe('DateInput Component', () => {
   });
 
   test('accepts initial value', () => {
-    render(<DateInput value="2024-01-15" />);
+    render(<DateInput defaultValue="2024-01-15" />);
     const input = screen.getByDisplayValue('2024-01-15');
     expect(input).toBeInTheDocument();
   });

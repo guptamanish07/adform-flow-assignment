@@ -1,9 +1,8 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setDateRange } from 'store/reducers/campaignReducer';
 import DateInput from 'shared/components/DateInput';
 import Label from 'shared/components/Label/Label';
+import useCampaignFilters from '../../hooks/useCampaignFilters';
 
 const DateRangeContainer = styled.fieldset`
   display: flex;
@@ -47,29 +46,27 @@ const ErrorMessage = styled.div`
 `;
 
 function DateRangeFilter() {
-  const dispatch = useDispatch();
-  const { dateRange } = useSelector(state => state.campaigns);
+  const {
+    dateRange,
+    isDateRangeValid,
+    dateRangeError,
+    handleStartDateChange,
+    handleEndDateChange
+  } = useCampaignFilters();
 
-  const handleStartDateChange = (e) => {
-    const startDate = e.target.value;
-    const endDate = dateRange.end;
-    
-    dispatch(setDateRange({ start: startDate, end: endDate }));
+  const hasDateError = !isDateRangeValid;
+
+  const handleStartChange = (e) => {
+    handleStartDateChange(e.target.value);
   };
 
-  const handleEndDateChange = (e) => {
-    const endDate = e.target.value;
-    const startDate = dateRange.start;
-    
-    dispatch(setDateRange({ start: startDate, end: endDate }));
+  const handleEndChange = (e) => {
+    handleEndDateChange(e.target.value);
   };
-
-  const hasDateError = dateRange?.start && dateRange?.end && 
-                       new Date(dateRange.start) > new Date(dateRange.end);
 
   return (
-    <DateRangeContainer 
-      role="group" 
+    <DateRangeContainer
+      role="group"
       aria-label="Date range filter"
     >
       <DateInputsContainer>
@@ -79,7 +76,7 @@ function DateRangeFilter() {
             id="start-date"
             name="start-date"
             value={dateRange?.start || ''}
-            onChange={handleStartDateChange}
+            onChange={handleStartChange}
             hasError={hasDateError}
             aria-label="Start date for campaign filter"
           />
@@ -91,7 +88,7 @@ function DateRangeFilter() {
             id="end-date"
             name="end-date"
             value={dateRange?.end || ''}
-            onChange={handleEndDateChange}
+            onChange={handleEndChange}
             hasError={hasDateError}
             min={dateRange?.start}
             aria-label="End date for campaign filter"
@@ -99,12 +96,12 @@ function DateRangeFilter() {
         </InputGroup>
       </DateInputsContainer>
 
-      {hasDateError && (
-        <ErrorMessage 
-          role="alert" 
+      {hasDateError && dateRangeError && (
+        <ErrorMessage
+          role="alert"
           aria-live="polite"
         >
-          End date cannot be before start date. Please select a valid date range.
+          {dateRangeError}
         </ErrorMessage>
       )}
     </DateRangeContainer>
@@ -112,3 +109,4 @@ function DateRangeFilter() {
 }
 
 export default DateRangeFilter;
+
