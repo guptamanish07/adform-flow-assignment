@@ -1,7 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setDateRange } from '../../../../store/reducers/campaignReducer';
+import { setDateRange } from 'store/reducers/campaignReducer';
+import DateInput from 'shared/components/DateInput';
+import Label from 'shared/components/Label/Label';
 
 const DateRangeContainer = styled.fieldset`
   display: flex;
@@ -25,11 +27,6 @@ const InputGroup = styled.div`
   }
 `;
 
-const Label = styled.label`
-  font-weight: 500;
-  color: #333;
-  font-size: 13px;
-`;
 
 const DateInputsContainer = styled.div`
   display: flex;
@@ -40,33 +37,6 @@ const DateInputsContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-  }
-`;
-
-const DateInput = styled.input`
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  width: 140px;
-  min-width: 120px;
-  transition: border-color 0.3s;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-  }
-
-  &.error {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    max-width: none;
   }
 `;
 
@@ -104,27 +74,25 @@ function DateRangeFilter() {
     >
       <DateInputsContainer>
         <InputGroup>
-          <Label htmlFor="start-date">From Date</Label>
+          <Label htmlFor="start-date" weight="500" size="13px">From Date</Label>
           <DateInput
-            type="date"
             id="start-date"
             name="start-date"
             value={dateRange?.start || ''}
             onChange={handleStartDateChange}
-            className={hasDateError ? 'error' : ''}
+            hasError={hasDateError}
             aria-label="Start date for campaign filter"
           />
         </InputGroup>
 
         <InputGroup>
-          <Label htmlFor="end-date">To Date</Label>
+          <Label htmlFor="end-date" weight="500" size="13px">To Date</Label>
           <DateInput
-            type="date"
             id="end-date"
             name="end-date"
             value={dateRange?.end || ''}
             onChange={handleEndDateChange}
-            className={hasDateError ? 'error' : ''}
+            hasError={hasDateError}
             min={dateRange?.start}
             aria-label="End date for campaign filter"
           />

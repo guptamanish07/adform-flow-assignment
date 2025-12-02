@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import DateInput from 'shared/components/DateInput';
+import Label from 'shared/components/Label';
+import Select from 'shared/components/Select';
+import Button from 'shared/components/Button';
+import Input from 'shared/components/Input';
 
 const FormContainer = styled.div`
   background: #f8f9fa;
@@ -33,109 +38,16 @@ const FormGroup = styled.div`
   flex-direction: column;
 `;
 
-const Label = styled.label`
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 5px;
-  font-size: 14px;
-`;
-
-const   Input = styled.input`
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  transition: border-color 0.3s;
-  box-sizing: border-box;
-
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-  }
-
-  &.error {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    min-width: 0; 
-  }
-
-`;
-
-const Select = styled.select`
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  background: white;
-  box-sizing: border-box;
-  transition: border-color 0.3s;
-
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
-  }
-
-  &.error {
-    border-color: #dc3545;
-    box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.25);
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    min-width: 0;
-  }
-
-`;
-
-const ErrorMessage = styled.div`
-  color: #dc3545;
-  font-size: 12px;
-  margin-top: 4px;
-`;
-
-
 const ButtonGroup = styled.div`
   display: flex;
   gap: 10px;
   justify-content: flex-end;
 `;
 
-const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:disabled {
-    cursor: not-allowed;
-    opacity: 0.6;
-  }
-`;
-
-const SubmitButton = styled(Button)`
-  background-color: #28a745;
-  color: white;
-
-  &:hover:not(:disabled) {
-    background-color: #218838;
-  }
-`;
-
-const CancelButton = styled(Button)`
-  background-color: #6c757d;
-  color: white;
-
-  &:hover {
-    background-color: #545b62;
-  }
+const ErrorMessage = styled.div`
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 4px;
 `;
 
 function CampaignForm({ onSubmit, onCancel }) {
@@ -208,10 +120,6 @@ function CampaignForm({ onSubmit, onCancel }) {
     }
   };
 
-  const getInputClassName = (fieldName) => {
-    return errors[fieldName] ? 'error' : '';
-  };
-
   const today = new Date().toISOString().split('T')[0];
 
   return (
@@ -227,36 +135,37 @@ function CampaignForm({ onSubmit, onCancel }) {
               type="text"
               value={formData.name}
               onChange={handleInputChange}
-              className={getInputClassName('name')}
+              hasError={!!errors.name}
               placeholder="Enter campaign name"
+              width="auto"
             />
-            {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+            <ErrorMessage>{errors.name}</ErrorMessage>
           </FormGroup>
 
           <FormGroup>
             <Label htmlFor="startDate">Start Date *</Label>
-            <Input
+            <DateInput
               id="startDate"
               name="startDate"
-              type="date"
               value={formData.startDate}
               onChange={handleInputChange}
-              className={getInputClassName('startDate')}
+              hasError={!!errors.startDate}
               min={today}
+              width="auto"
             />
             {errors.startDate && <ErrorMessage>{errors.startDate}</ErrorMessage>}
           </FormGroup>
 
           <FormGroup>
             <Label htmlFor="endDate">End Date *</Label>
-            <Input
+            <DateInput
               id="endDate"
               name="endDate"
-              type="date"
               value={formData.endDate}
               onChange={handleInputChange}
-              className={getInputClassName('endDate')}
+              hasError={!!errors.endDate}
               min={formData.startDate}
+              width="auto"
             />
             {errors.endDate && <ErrorMessage>{errors.endDate}</ErrorMessage>}
           </FormGroup>
@@ -271,8 +180,9 @@ function CampaignForm({ onSubmit, onCancel }) {
               min="0"
               value={formData.Budget}
               onChange={handleInputChange}
-              className={getInputClassName('Budget')}
+              hasError={!!errors.Budget}
               placeholder="0.00"
+              width="auto"
             />
             {errors.Budget && <ErrorMessage>{errors.Budget}</ErrorMessage>}
           </FormGroup>
@@ -284,7 +194,7 @@ function CampaignForm({ onSubmit, onCancel }) {
               name="userId"
               value={formData.userId}
               onChange={handleInputChange}
-              className={getInputClassName('userId')}
+              hasError={!!errors.userId}
             >
               <option value="">Select a user</option>
               {users.map(user => (
@@ -298,12 +208,12 @@ function CampaignForm({ onSubmit, onCancel }) {
         </FormGrid>
 
         <ButtonGroup>
-          <CancelButton type="button" onClick={onCancel}>
+          <Button variant="secondary" type="button" onClick={onCancel}>
             Cancel
-          </CancelButton>
-          <SubmitButton type="submit">
+          </Button>
+          <Button variant="success" type="submit">
             Add Campaign
-          </SubmitButton>
+          </Button>
         </ButtonGroup>
       </form>
     </FormContainer>
