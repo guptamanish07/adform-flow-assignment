@@ -3,7 +3,7 @@ import { fetchUsers } from './store/reducers/userReducer';
 import { addCampaigns } from './store/reducers/campaignReducer';
 import store from './store/store';
 import { Provider, useDispatch } from 'react-redux';
-import CampaignManager from './components/CampaignManager';
+import CampaignManager from './features/campaigns';
 import { initialCampaigns } from './data/intialCampaigns';
 
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setSearchTerm, clearFilters } from '../store/reducers/campaignReducer';
+import { setSearchTerm, clearFilters } from '../../../../store/reducers/campaignReducer';
 
 const SearchContainer = styled.div`
   display: flex;

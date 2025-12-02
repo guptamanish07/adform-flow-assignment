@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setDateRange } from '../store/reducers/campaignReducer';
+import { setDateRange } from '../../../../store/reducers/campaignReducer';
 
 const DateRangeContainer = styled.fieldset`
   display: flex;

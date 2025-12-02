@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { mockCampaignsData, mockUsersData } from './mockData';
+import { mockCampaignsData, mockUsersData } from '../CampaignFilters/mockData';
 
 jest.mock('react-redux', () => ({
     useSelector: jest.fn(),

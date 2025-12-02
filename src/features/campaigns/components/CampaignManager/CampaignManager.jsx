@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useSelector, shallowEqual , useDispatch} from 'react-redux';
 
-import SearchCampaign  from './SearchCampaign';
-import DateRangeFilter from './DateRangeFilter';
-import CampaignList from './CampaignList';
-import CampaignForm from './CampaignForm';
+import SearchCampaign  from 'features/campaigns/components/CampaignFilters/SearchCampaign';
+import DateRangeFilter from 'features/campaigns/components/CampaignFilters/DateRangeFilter';
+import CampaignList from 'features/campaigns/components/CampaignList';
+import CampaignForm from 'features/campaigns/components/CampaignForm';
 
-import { addCampaigns } from '../store/reducers/campaignReducer';
+import { addCampaigns } from 'store/reducers/campaignReducer';
 
 
 import styled from 'styled-components';
