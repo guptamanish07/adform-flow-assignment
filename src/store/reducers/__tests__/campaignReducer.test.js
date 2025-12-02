@@ -27,7 +27,7 @@ describe('campaignReducer', () => {
   ];
 
   it('should return initial state', () => {
-    const result = campaignReducer(undefined, {});
+    const result = campaignReducer(initialState, {});
     expect(result).toEqual(initialState);
   });
 

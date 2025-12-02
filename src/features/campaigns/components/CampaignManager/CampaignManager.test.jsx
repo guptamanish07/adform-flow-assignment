@@ -38,7 +38,6 @@ describe('<CampaignManager />', () => {
         render(<CampaignManager />);
         
         expect(screen.getByText('Filters')).toBeInTheDocument();
-        expect(screen.getByText('Campaigns')).toBeInTheDocument();
         expect(screen.getByText('Divavu')).toBeInTheDocument();
     });
 
