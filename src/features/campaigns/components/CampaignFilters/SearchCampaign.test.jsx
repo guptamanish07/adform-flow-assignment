@@ -2,16 +2,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useSelector, useDispatch } from 'react-redux';
-import SearchCampaign from '../SearchCampaign';
-import { setSearchTerm, clearFilters } from '../../store/reducers/campaignReducer';
+import SearchCampaign from './SearchCampaign';
+import { setSearchTerm, clearFilters } from 'store/reducers/campaignReducer';
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
   useDispatch: jest.fn(),
 }));
 
-jest.mock('../../store/reducers/campaignReducer', () => ({
-  ...jest.requireActual('../../store/reducers/campaignReducer'),
+jest.mock('store/reducers/campaignReducer', () => ({
+  ...jest.requireActual('store/reducers/campaignReducer'),
   setSearchTerm: jest.fn(),
   clearFilters: jest.fn(),
 }));

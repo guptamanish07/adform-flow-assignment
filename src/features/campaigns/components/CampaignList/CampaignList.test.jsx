@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import CampaignList from '../../../../components/CampaignList';
+import CampaignList from './CampaignList';
 import { mockCampaignsData, mockUsersData } from '../CampaignFilters/mockData';
 
 describe('CampaignList Component', () => {

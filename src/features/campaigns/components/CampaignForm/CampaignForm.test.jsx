@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
-import CampaignForm from '../../../../components/CampaignForm';
+import CampaignForm from './CampaignForm';
 import { mockUsersData } from '../CampaignFilters/mockData';
 
 jest.mock('react-redux', () => ({

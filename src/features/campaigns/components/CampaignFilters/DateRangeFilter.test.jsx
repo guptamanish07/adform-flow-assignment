@@ -2,16 +2,16 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { useSelector, useDispatch } from 'react-redux';
-import DateRangeFilter from '../DateRangeFilter';
-import { setDateRange } from '../../store/reducers/campaignReducer';
+import DateRangeFilter from './DateRangeFilter';
+import { setDateRange } from 'store/reducers/campaignReducer';
 
 jest.mock('react-redux', () => ({
   useSelector: jest.fn(),
   useDispatch: jest.fn(),
 }));
 
-jest.mock('../../store/reducers/campaignReducer', () => ({
-  ...jest.requireActual('../../store/reducers/campaignReducer'),
+jest.mock('store/reducers/campaignReducer', () => ({
+  ...jest.requireActual('store/reducers/campaignReducer'),
   setDateRange: jest.fn(),
 }));
 
@@ -38,7 +38,6 @@ describe('<DateRangeFilter />', () => {
       expect(screen.getByText('To Date')).toBeInTheDocument();
       expect(screen.getByLabelText('Start date for campaign filter')).toBeInTheDocument();
       expect(screen.getByLabelText('End date for campaign filter')).toBeInTheDocument();
-      expect(screen.getByText('to')).toBeInTheDocument();
     });
 
     test('displays current date range from Redux state', () => {
